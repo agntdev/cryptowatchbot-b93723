@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Add Ticker",
+    "steps": [
+      {
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Add a new coin to the watchlist with free-text input"
+            }
+          }
+        ],
+        "send": {
+          "callback": "watchlist:add"
+        }
+      }
+    ]
+  }
+]
