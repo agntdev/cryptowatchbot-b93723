@@ -1,19 +1,26 @@
 [
   {
-    "name": "Set Morning Summary",
+    "name": "Set Morning Summary shows current time",
     "steps": [
       {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "summary:configure" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Configure daily morning summary time"
+              "text": "Current morning summary time: 08:00\n\nWhat time should you receive your daily summary?"
             }
           }
-        ],
-        "send": {
-          "callback": "summary:configure"
-        }
+        ]
       }
     ]
   }

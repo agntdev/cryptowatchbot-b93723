@@ -1,19 +1,73 @@
 [
   {
-    "name": "Manage Watchlist",
+    "name": "Manage Watchlist shows empty state then adds ticker",
     "steps": [
       {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "watchlist:manage" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "View and modify watchlist items with inline buttons"
+              "text": "Your watchlist is empty. Tap a button below to add a coin."
             }
           }
-        ],
-        "send": {
-          "callback": "watchlist:manage"
-        }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Manage Watchlist shows items after adding",
+    "steps": [
+      {
+        "send": { "text": "/start" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "watchlist:add" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Type a ticker symbol (e.g. BTC, ETH, DOGE) or tap a common coin below:"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "watchlist:quickadd:ETH" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "✅ Added Ethereum (ETH) to your watchlist."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "watchlist:manage" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Your watchlist:"
+            }
+          }
+        ]
       }
     ]
   }
