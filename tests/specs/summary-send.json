@@ -1,6 +1,6 @@
 [
   {
-    "name": "Set Quiet Hours shows current hours",
+    "name": "Morning summary with empty watchlist",
     "steps": [
       {
         "send": { "text": "/start" },
@@ -12,12 +12,12 @@
         ]
       },
       {
-        "send": { "callback": "quiet:configure" },
+        "send": { "callback": "summary:send" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Current quiet hours: 22:00 – 07:00\n\nWhen should alerts stop? Pick a start hour:"
+              "text": "No coins in your watchlist yet. Add some to track prices."
             }
           }
         ]

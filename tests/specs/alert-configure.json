@@ -1,42 +1,6 @@
 [
   {
-    "name": "Add Ticker via quick-add button",
-    "steps": [
-      {
-        "send": { "text": "/start" },
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": { "text": "👋 Welcome! Tap a button below to get started." }
-          }
-        ]
-      },
-      {
-        "send": { "callback": "watchlist:add" },
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "Type a ticker symbol (e.g. BTC, ETH, DOGE) or tap a common coin below:"
-            }
-          }
-        ]
-      },
-      {
-        "send": { "callback": "watchlist:quickadd:BTC" },
-        "expect": [
-          {
-            "method": "sendMessage",
-            "payload": {
-              "text": "✅ Added Bitcoin (BTC) to your watchlist."
-            }
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "name": "Add Ticker that already exists",
+    "name": "Alert configuration flow - price above",
     "steps": [
       {
         "send": { "text": "/start" },
@@ -70,12 +34,23 @@
         ]
       },
       {
-        "send": { "callback": "watchlist:quickadd:BTC" },
+        "send": { "callback": "alert:configure:bitcoin" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Bitcoin (BTC) is already on your watchlist."
+              "text": "Set alert for Bitcoin (BTC). What type of alert?"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "alert:settype:bitcoin:price_above" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "What price should trigger the alert? (e.g. 50000 for $50,000)"
             }
           }
         ]
@@ -83,7 +58,7 @@
     ]
   },
   {
-    "name": "Add Ticker that is unknown",
+    "name": "Alert configuration flow - percent change",
     "steps": [
       {
         "send": { "text": "/start" },
@@ -106,12 +81,34 @@
         ]
       },
       {
-        "send": { "callback": "watchlist:quickadd:XYZ" },
+        "send": { "callback": "watchlist:quickadd:ETH" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Couldn't find \"XYZ\". Check the symbol and try again — common ones are BTC, ETH, TON, SOL."
+              "text": "✅ Added Ethereum (ETH) to your watchlist."
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "alert:configure:ethereum" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "Set alert for Ethereum (ETH). What type of alert?"
+            }
+          }
+        ]
+      },
+      {
+        "send": { "callback": "alert:settype:ethereum:percent_change" },
+        "expect": [
+          {
+            "method": "sendMessage",
+            "payload": {
+              "text": "What percentage change should trigger the alert? (e.g. 5 for 5%)"
             }
           }
         ]

@@ -1,6 +1,6 @@
 [
   {
-    "name": "Set Quiet Hours shows current hours",
+    "name": "Alert check with no alerts",
     "steps": [
       {
         "send": { "text": "/start" },
@@ -12,12 +12,12 @@
         ]
       },
       {
-        "send": { "callback": "quiet:configure" },
+        "send": { "callback": "alert:check" },
         "expect": [
           {
             "method": "sendMessage",
             "payload": {
-              "text": "Current quiet hours: 22:00 – 07:00\n\nWhen should alerts stop? Pick a start hour:"
+              "text": "No active alerts. Set one up from your watchlist."
             }
           }
         ]
